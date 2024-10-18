@@ -271,17 +271,17 @@
     </div>
   </div>
 
-  <app-auth />
+  <auth />
 </template>
 
 <script>
-import AppAuth from "./components/AppAuth.vue"
-import AppHeader from "./components/AppHeader.vue"
+import Auth from "@/components/Auth.vue"
+import AppHeader from "@/components/Header.vue"
 
 // import image from
 export default {
   name: "App",
-  components: { AppHeader, AppAuth },
+  components: { AppHeader, Auth },
   data() {
     return {
       publicPath: import.meta.env.BASE_URL,
