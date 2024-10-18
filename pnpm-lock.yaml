@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@vee-validate/rules':
+        specifier: ^4.13.2
+        version: 4.13.2(vue@3.5.12(typescript@5.6.3))
       pinia:
         specifier: ^2.2.4
         version: 2.2.4(typescript@5.6.3)(vue@3.5.12(typescript@5.6.3))
@@ -479,6 +482,9 @@ packages:
   '@typescript-eslint/visitor-keys@8.9.0':
     resolution: {integrity: sha512-Ht4y38ubk4L5/U8xKUBfKNYGmvKvA1CANoxiTRMM+tOLk3lbF3DvzZCxJCRSE+2GdCMSh6zq9VZJc3asc1XuAA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@vee-validate/rules@4.13.2':
+    resolution: {integrity: sha512-NrmjxXw/gZQVhjgwIdEOeRYxn74I/3BYXTuExdwbpCPVgFh0pjTQx9aPGkVBnueeszVqO2LfWyKUpvwSWLPXRA==}
 
   '@vitejs/plugin-vue@5.1.4':
     resolution: {integrity: sha512-N2XSI2n3sQqp5w7Y/AN/L2XDjBIRGqXko+eDp42sydYSBeJuSm5a1sLf8zakmo8u7tA8NmBgoDLA1HeOESjp9A==}
@@ -2576,6 +2582,12 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 8.9.0
       eslint-visitor-keys: 3.4.3
+
+  '@vee-validate/rules@4.13.2(vue@3.5.12(typescript@5.6.3))':
+    dependencies:
+      vee-validate: 4.13.2(vue@3.5.12(typescript@5.6.3))
+    transitivePeerDependencies:
+      - vue
 
   '@vitejs/plugin-vue@5.1.4(vite@5.4.9(@types/node@22.7.6))(vue@3.5.12(typescript@5.6.3))':
     dependencies:
