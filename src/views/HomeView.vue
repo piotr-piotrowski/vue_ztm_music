@@ -1,3 +1,1 @@
-<template>
-  <p>{{}}</p>
-</template>
+<template></template>
