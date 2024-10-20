@@ -86,6 +86,20 @@
       </vee-field>
       <ErrorMessage class="text-red-600" name="country" />
     </div>
+    <!-- Favorite animal -->
+    <div class="mb-3">
+      <label class="inline-block mb-2">Animal</label>
+      <vee-field
+        as="select"
+        name="animal"
+        class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
+      >
+        <option value="Lion">Lion</option>
+        <option value="Hippo">Hippo</option>
+        <option value="Giraffe">Giraffe</option>
+      </vee-field>
+      <ErrorMessage class="text-red-600" name="animal" />
+    </div>
     <!-- TOS -->
     <div class="mb-3 pl-6">
       <vee-field
@@ -109,9 +123,15 @@
 
 <script>
 import { ErrorMessage } from "vee-validate"
+import { auth, userCollection } from "@/includes/firebase"
+import { mapWritableState } from "pinia"
+import useUserStore from "@/stores/user"
 
 export default {
   name: "RegisterForm",
+  components: {
+    ErrorMessage,
+  },
   data() {
     return {
       schema: {
@@ -121,10 +141,12 @@ export default {
         password: "required|min:9|max:100|excluded:password",
         confirm_password: "passwords_mismatch:@password",
         country: "required|country_excluded:Antarctica",
+        animal: "required",
         tos: "tos",
       },
       userData: {
         country: "USA",
+        animal: "Hippo",
       },
       reg_in_submission: false,
       reg_show_alert: false,
@@ -132,17 +154,51 @@ export default {
       reg_alert_msg: "Please wait! Your account is being created.",
     }
   },
-  computed: {},
+  computed: {
+    ...mapWritableState(useUserStore, ["userLoggedIn"]),
+  },
   methods: {
-    register(values) {
+    async register(values) {
       this.reg_show_alert = true
       this.reg_in_submission = true
       this.reg_alert_variant = "bg-blue-500"
       this.reg_alert_msg = "Please wait! Your account is being created."
 
+      let userCredentials = null
+      try {
+        userCredentials = await auth.createUserWithEmailAndPassword(
+          values.email,
+          values.password,
+        )
+      } catch (error) {
+        this.reg_in_submission = false
+        this.reg_alert_variant = "bg-red-500"
+        this.reg_alert_msg =
+          "An unexpected error occured. Please try again later."
+        return
+      }
+
+      try {
+        await userCollection.add({
+          name: values.name,
+          email: values.email,
+          age: values.age,
+          country: values.country,
+          animal: values.animal,
+        })
+      } catch (error) {
+        this.reg_in_submission = false
+        this.reg_alert_variant = "bg-red-500"
+        this.reg_alert_msg =
+          "An unexpected error occured. Please try again later."
+        return
+      }
+
+      this.userLoggedIn = true
+
       this.reg_alert_variant = "bg-green-500"
       this.reg_alert_msg = "Success! Your account has been created."
-      console.log(values)
+      console.log(userCredentials)
     },
   },
 }
