@@ -180,6 +180,10 @@
 <script>
 export default {
     name: 'Manage',
+    beforeRouteEnter(to, from, next) {
+      console.log('beforeRouteEnter Guard');
+      next()
+    }
 }
 </script>
 
