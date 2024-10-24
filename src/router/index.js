@@ -16,6 +16,7 @@ const routes = [
   },
   {
     name: 'manage',
+    // alias: '/manage', // redirect over alias
     path: "/manage-music",
     component: Manage
   },
