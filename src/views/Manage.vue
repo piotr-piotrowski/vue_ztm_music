@@ -133,13 +133,13 @@
 
 <script>
 // import useUserStore from "@/stores/user"
-import AppUpload from '@/components/Upload.vue'
+import AppUpload from "@/components/Upload.vue"
 
 export default {
   name: "Manage",
   components: {
     AppUpload,
-  }
+  },
   // beforeRouteEnter(to, from, next) {
   //   const store = useUserStore()
 
@@ -151,5 +151,3 @@ export default {
   // }
 }
 </script>
-
-<style lang="scss" scoped></style>
