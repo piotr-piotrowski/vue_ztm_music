@@ -3,7 +3,6 @@ import "firebase/auth"
 import "firebase/firestore"
 import "firebase/storage"
 
-
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -24,5 +23,6 @@ const db = firebase.firestore()
 const storage = firebase.storage()
 
 const userCollection = db.collection("users")
+const songCollection = db.collection("songs")
 
-export { auth, db, storage, userCollection }
+export { auth, db, storage, userCollection, songCollection }
