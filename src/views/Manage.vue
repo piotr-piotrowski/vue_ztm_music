@@ -134,11 +134,18 @@
 <script>
 // import useUserStore from "@/stores/user"
 import AppUpload from "@/components/Upload.vue"
+import { auth, songCollection } from "@/includes/firebase"
 
 export default {
   name: "Manage",
   components: {
     AppUpload,
+  },
+  async created() {
+    const snapshot = await songCollection
+      .where("uid", "==", auth.currentUser.uid)
+      .get()
+    console.log(snapshot)
   },
   // beforeRouteLeave(to, from, next) {
   //   console.log('beforeRouteLeave for Mange.vue')
