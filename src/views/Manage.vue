@@ -141,11 +141,23 @@ export default {
   components: {
     AppUpload,
   },
+  data() {
+    return {
+      songs: [],
+    }
+  },
   async created() {
     const snapshot = await songCollection
       .where("uid", "==", auth.currentUser.uid)
       .get()
-    console.log(snapshot)
+
+    snapshot.forEach(document => {
+      const song = {
+        ...document.data(),
+        docID: document.id,
+      }
+      this.songs.push(song)
+    })
   },
   // beforeRouteLeave(to, from, next) {
   //   console.log('beforeRouteLeave for Mange.vue')
