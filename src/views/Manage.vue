@@ -24,6 +24,7 @@
               :updateSong="updateSong"
               :index="i"
               :removeSong="removeSong"
+              :updateUnsavedFlag="updateUnsavedFlag"
             />
           </div>
         </div>
@@ -47,6 +48,7 @@ export default {
   data() {
     return {
       songs: [],
+      unsavedFlag: false,
     }
   },
   methods: {
@@ -64,6 +66,9 @@ export default {
       }
       this.songs.push(song)
     },
+    updateUnsavedFlag(value) {
+      this.unsavedFlag = value
+    }
   },
   async created() {
     const snapshot = await songCollection
@@ -71,6 +76,15 @@ export default {
       .get()
 
     snapshot.forEach(this.addSong)
+  },
+  beforeRouteLeave(to, from, next) {
+    if(!this.unsavedFlag) {
+      next()
+    } else {
+      // eslint-disable-next-line no-alert, no-restricted-globals
+      const leave = confirm('You have unsaved changes. Are you sure you want to leave?')
+      next(leave)
+    }
   },
   // beforeRouteLeave(to, from, next) {
   //   console.log('beforeRouteLeave for Mange.vue')
