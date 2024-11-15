@@ -52,6 +52,8 @@ export default {
     return {
       publicPath: import.meta.env.BASE_URL,
       songs: [],
+      maxPerPage: 3,
+      pendingRequest: false,
     }
   },
   components: {
@@ -60,22 +62,45 @@ export default {
   async created() {
     this.getSongs()
 
-    window.addEventListener('scroll', this.handleScroll)
+    window.addEventListener("scroll", this.handleScroll)
   },
   beforeUnmount() {
-    window.removeEventListener('scroll', this.handleScroll)
+    window.removeEventListener("scroll", this.handleScroll)
   },
   methods: {
     handleScroll() {
-      const {scrollTop, offsetHeight} = document.documentElement
+      const { scrollTop, offsetHeight } = document.documentElement
       const { innerHeight } = window
-      const bottomOfWindow = Math.round(scrollTop) + innerHeight === offsetHeight
+      const bottomOfWindow =
+        Math.round(scrollTop) + innerHeight === offsetHeight
       if (bottomOfWindow) {
-        console.log("Bottom of window");
+        this.getSongs()
       }
     },
     async getSongs() {
-      const snapshots = await songCollection.get()
+      if (this.pendingRequest) {
+        return
+      }
+
+      this.pendingRequest = true
+
+      let snapshots
+
+      if (this.songs.length) {
+        const lastDoc = await songCollection
+          .doc(this.songs[this.songs.length - 1].docID)
+          .get()
+        snapshots = await songCollection
+          .orderBy("modified_name")
+          .startAfter(lastDoc)
+          .limit(this.maxPerPage)
+          .get()
+      } else {
+        snapshots = await songCollection
+          .orderBy("modified_name")
+          .limit(this.maxPerPage)
+          .get()
+      }
 
       snapshots.forEach(document => {
         this.songs.push({
@@ -84,6 +109,8 @@ export default {
         })
       })
       console.log(this.songs)
+
+      this.pendingRequest = false
     },
   },
 }
