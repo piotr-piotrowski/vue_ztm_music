@@ -3,6 +3,7 @@ import Home from "@/views/Home.vue"
 import Manage from "@/views/Manage.vue"
 import { createRouter, createWebHistory } from "vue-router"
 import useUserStore from "@/stores/user"
+import Song from "@/views/Song.vue"
 
 const routes = [
   {
@@ -14,6 +15,11 @@ const routes = [
     name: "about",
     path: "/about",
     component: About,
+  },
+  {
+    name: "song",
+    path: "/song/:id",
+    component: Song,
   },
   {
     name: "manage",
