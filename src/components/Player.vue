@@ -44,9 +44,8 @@
 </template>
 
 <script>
-import { mapActions } from "pinia"
+import { mapActions, mapState } from "pinia"
 import usePlayerStore from "@/stores/player"
-import { mapState } from "pinia"
 
 export default {
   name: "Player",
