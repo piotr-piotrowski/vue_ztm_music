@@ -118,7 +118,6 @@ export default {
           ...document.data(),
         })
       })
-      console.log(this.songs)
 
       this.pendingRequest = false
     },
