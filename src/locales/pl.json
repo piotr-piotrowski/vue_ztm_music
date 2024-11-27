@@ -1,6 +1,8 @@
 {
-    "home": {
-      "listen": "Posłuchaj wspaniałej muzyki!"
-    }
+  "home": {
+    "listen": "Posłuchaj wspaniałej muzyki!"
+  },
+  "song": {
+    "comment_count": "Brak komentarzy | 1 komentarz | {count} komentarze"
   }
-  
+}

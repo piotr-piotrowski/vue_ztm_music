@@ -59,7 +59,7 @@ export default {
     return {
       publicPath: import.meta.env.BASE_URL,
       songs: [],
-      maxPerPage: 3,
+      maxPerPage: 10,
       pendingRequest: false,
     }
   },
