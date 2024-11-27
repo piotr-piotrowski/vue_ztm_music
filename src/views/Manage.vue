@@ -10,7 +10,7 @@
           class="bg-white rounded border border-gray-200 relative flex flex-col"
         >
           <div class="px-6 pt-6 pb-5 font-bold border-b border-gray-200">
-            <span class="card-title">My Songs</span>
+            <span class="card-title">{{ $t("manage.my_songs") }}</span>
             <i
               class="fa fa-compact-disc float-right text-green-400 text-2xl"
             ></i>
@@ -68,7 +68,7 @@ export default {
     },
     updateUnsavedFlag(value) {
       this.unsavedFlag = value
-    }
+    },
   },
   async created() {
     const snapshot = await songCollection
@@ -78,10 +78,12 @@ export default {
     snapshot.forEach(this.addSong)
   },
   beforeRouteLeave(to, from, next) {
-    if(!this.unsavedFlag) {
+    if (!this.unsavedFlag) {
       next()
     } else {
-      const leave = confirm('You have unsaved changes. Are you sure you want to leave?')
+      const leave = confirm(
+        "You have unsaved changes. Are you sure you want to leave?",
+      )
       next(leave)
     }
   },
