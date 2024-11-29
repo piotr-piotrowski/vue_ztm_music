@@ -24,6 +24,10 @@ export default defineConfig({
           },
         ],
       },
+      workbox: {
+        globPatterns: ["**/*.{js,css,html,jpg,png,}"],
+        globIgnores: ["assets/img/pwa-192x192.png"],
+      },
     }),
   ],
   resolve: {
