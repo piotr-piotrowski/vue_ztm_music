@@ -66,6 +66,17 @@ export default {
           return
         }
 
+        if (!navigator.onLine) {
+          this.uploads.push({
+            task: {},
+            current_progress: 100,
+            name: file.name,
+            variant: "bg-red-400",
+            icon: "fas fa-times",
+          })
+          return
+        }
+
         const storageRef = storage.ref()
         const songsRef = storageRef.child(`songs/${file.name}`)
         const task = songsRef.put(file)
