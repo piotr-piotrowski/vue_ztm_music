@@ -19,7 +19,6 @@
     "howler": "^2.2.4",
     "pinia": "^2.2.4",
     "vee-validate": "^4.13.2",
-    "vite-plugin-pwa": "^0.21.0",
     "vue": "^3.5.12",
     "vue-i18n": "10",
     "vue-router": "^4.4.5"
@@ -41,6 +40,8 @@
     "start-server-and-test": "^2.0.8",
     "tailwindcss": "^3.4.14",
     "vite": "^5.4.8",
-    "vitest": "^2.1.2"
+    "vite-plugin-pwa": "^0.21.0",
+    "vitest": "^2.1.2",
+    "workbox-window": "^7.3.0"
   }
 }
